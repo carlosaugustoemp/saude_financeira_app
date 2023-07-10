@@ -1,0 +1,97 @@
+<div class="container">
+
+    <h1>Listando lançamentos</h1>
+ 
+    <button routerLink="create" class="mat-elevation-z8" mat-stroked-button color="primary">Novo lançamento</button>
+  
+    <mat-form-field >
+       <mat-label>Filter</mat-label>
+       <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium" #input>
+     </mat-form-field>
+ 
+    <div class="mat-elevation-z8">
+ 
+       <table mat-table [dataSource]="dataSource">
+ 
+          <ng-container matColumnDef="id">
+             <th mat-header-cell *matHeaderCellDef> ID </th>
+             <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+          </ng-container>
+ 
+          <ng-container matColumnDef="tipoConta">
+             <th mat-header-cell *matHeaderCellDef> Cód Tipo </th>
+             <td mat-cell *matCellDef="let element"> {{element.tipoConta}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="descricaoTipoConta">
+            <th mat-header-cell *matHeaderCellDef> Tipo Lançamento </th>
+            <td mat-cell *matCellDef="let element"> {{retornaDescricaoTipoConta(element.tipoConta)}} </td>
+         </ng-container>
+ 
+          <ng-container matColumnDef="valor">
+             <th mat-header-cell *matHeaderCellDef> Valor </th>
+             <td mat-cell *matCellDef="let element"> {{element.valor}} </td>
+          </ng-container>
+ 
+          <ng-container matColumnDef="contaEntrada">
+             <th mat-header-cell *matHeaderCellDef> Cod Ctt Entrada </th>
+             <td mat-cell *matCellDef="let element"> {{element.contaEntrada.id}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="contaEntradaDescricao">
+            <th mat-header-cell *matHeaderCellDef> Desc Ctt Entrada </th>
+            <td mat-cell *matCellDef="let element">
+                <div *ngIf="element.contaEntrada;" >
+                   {{element.contaEntrada.descricao}}
+                 </div>
+            </td>
+         </ng-container>
+
+          <ng-container matColumnDef="contaSaida">
+            <th mat-header-cell *matHeaderCellDef> Cod Ctt Saída </th>
+            <td mat-cell *matCellDef="let element">
+                <div *ngIf="element.contaSaida;" >
+                   {{element.contaSaida.id}}
+                 </div>
+            </td>
+         </ng-container>
+
+         <ng-container matColumnDef="contaSaidaDescricao">
+            <th mat-header-cell *matHeaderCellDef> Desc Ctt Saída </th>
+            <td mat-cell *matCellDef="let element">
+                <div *ngIf="element.contaSaida;" >
+                   {{element.contaSaida.descricao}}
+                 </div>
+            </td>
+         </ng-container>
+ 
+          <ng-container matColumnDef="data">
+             <th mat-header-cell *matHeaderCellDef> Data </th>
+             <td mat-cell *matCellDef="let element"> {{element.data}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="observacao">
+            <th mat-header-cell *matHeaderCellDef> Observação </th>
+            <td mat-cell *matCellDef="let element"> {{element.observacao}} </td>
+         </ng-container>
+ 
+          <ng-container matColumnDef="acoes">
+             <th mat-header-cell *matHeaderCellDef> Ações </th>
+             <td mat-cell *matCellDef="let element">
+                <a routerLink="update/{{ element.id }}">
+                   <i class="material-icons edit">edit</i>
+                </a>
+                <a routerLink="delete/{{ element.id }}">
+                   <i class="material-icons delete">delete</i>
+                </a>
+             </td>
+          </ng-container>
+ 
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+       </table>
+ 
+       <mat-paginator [pageSizeOptions]="[5, 2, 10, 20, 50, 100]" showFirstLastButtons></mat-paginator>
+    </div>
+ 
+ </div>
