@@ -13,7 +13,7 @@ export class DespesaPorContaService {
 
   constructor(private http: HttpClient) { }
 
-  findTotalDespesaConta(): Observable<DespesaPorConta[]> {
-    return this.http.get<DespesaPorConta[]>(`${API_CONFIG.baseUrl}/totaldespesaconta`);
+  findTotalDespesaConta(inicio: string, final: string): Observable<DespesaPorConta[]> {
+    return this.http.get<DespesaPorConta[]>(`${API_CONFIG.baseUrl}/totaldespesaconta?dtinicio=${inicio}&dtfinal=${final}`);
   }
 }

@@ -24,6 +24,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { MatCardModule } from '@angular/material/card';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 
 import { NavComponent } from './components/nav/nav.component';
 import { HomeComponent } from './components/home/home.component';
@@ -79,6 +81,8 @@ import { SaldoTotalComponent } from './components/graficos/saldo-total/saldo-tot
         MatIconModule,
         MatListModule,
         MatCardModule,
+        MatDatepickerModule,
+        MatNativeDateModule,
         ToastrModule.forRoot({
           timeOut: 4000,
           closeButton: true,

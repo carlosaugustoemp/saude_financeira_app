@@ -6,6 +6,7 @@ import { Conta } from 'src/app/models/conta';
 import { Lancamento } from 'src/app/models/lancamento';
 import { ContaService } from 'src/app/services/conta.service';
 import { LancamentoService } from 'src/app/services/lancamento.service';
+import { DateAdapter } from '@angular/material/core';
 
 @Component({
   selector: 'app-lancamento-create',
@@ -14,11 +15,12 @@ import { LancamentoService } from 'src/app/services/lancamento.service';
 })
 export class LancamentoCreateComponent {
   tipoLancamentoSelecionado: string;
+  lancamentodata: Date ;
 
   lancamento: Lancamento = {
     tipoConta: '',
     valor: 0,
-    data: '',
+    data: ' ',
     contaEntrada: { id: 0 ,descricao:'', tipoConta: 0} ,
     contaSaida: { id: 0 ,descricao:'', tipoConta: 0} ,
     observacao: ''
@@ -27,7 +29,6 @@ export class LancamentoCreateComponent {
   contas: Conta[] = []
 
   valor: FormControl = new FormControl(null, [Validators.required]);
-  data:     FormControl = new FormControl(null, [Validators.required]);
   contaEntrada:    FormControl = new FormControl(null, [Validators.required]);
   contaSaida:    FormControl = new FormControl(null, [Validators.required]);
   observacao:FormControl = new FormControl(null, [Validators.required]);
@@ -37,7 +38,10 @@ export class LancamentoCreateComponent {
     private contaService: ContaService,
     private toastService:    ToastrService,
     private router: Router,
-  ) { }
+    private dateAdapter: DateAdapter<Date>
+  ) {
+    this.dateAdapter.setLocale('en-GB');
+   }
 
   ngOnInit(): void {
     this.findAllContas();
@@ -45,11 +49,10 @@ export class LancamentoCreateComponent {
 
   create(): void {
     this.lancamento.tipoConta = this.tipoLancamentoSelecionado;
-
-    console.log("Tentando enviar");
-    console.log(this.lancamento);
-
-
+    const dia = this.lancamentodata.getDate().toString().padStart(2,'0')
+    const mes = String(this.lancamentodata.getMonth() + 1).padStart(2,'0')
+    const ano = this.lancamentodata.getFullYear() 
+    this.lancamento.data =dia+"/"+mes+"/"+ano
     this.lancamentoService.create(this.lancamento).subscribe(resposta => {
       this.toastService.success('Lancamento criado com sucesso', 'Novo lancamento');
       this.router.navigate(['lancamentos']);
@@ -68,7 +71,7 @@ export class LancamentoCreateComponent {
   }
 
   validaCampos(): boolean {
-    return this.valor.valid && this.data.valid && this.contaEntrada.valid 
+    return this.valor.valid && this.contaEntrada.valid 
        && this.contaSaida.valid && this.observacao.valid 
   }
 

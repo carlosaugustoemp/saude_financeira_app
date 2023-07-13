@@ -1,4 +1,25 @@
+<mat-form-field>
+  <mat-label>Data Inicial</mat-label>
+  <input matInput [matDatepicker]="picker"
+  [(ngModel)]="dataInicial" 
+  name="lancamentodata" >
+  <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+  <mat-datepicker #picker></mat-datepicker>
+</mat-form-field>
+
+<mat-form-field>
+  <mat-label>Data Inicial</mat-label>
+  <input matInput [matDatepicker]="picker"
+  [(ngModel)]="dataFinal" 
+  name="lancamentodata" >
+  <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+  <mat-datepicker #picker></mat-datepicker>
+</mat-form-field>
+
+<button (click)="Ok()" class="full-width mat-elevation-z4" mat-raised-button color="primary">OK</button>
+
 <div #ContainerRef class="card-body">
+  
   <ngx-charts-bar-vertical 
     [view]="[ContainerRef.offsetWidth, 200]"
     scheme="picnic"

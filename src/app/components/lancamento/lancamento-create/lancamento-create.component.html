@@ -12,16 +12,28 @@
          required
          matInput currencyMask placeholder="Ex. 120.00">
        </mat-form-field>
-
+<!--
        <mat-form-field class="full-width" appearance="outline">
         <mat-label>Data</mat-label>
         <input 
         [(ngModel)]="lancamento.data"
         name="data"
-        [formControl]="data"
+        
         required
         matInput >
       </mat-form-field>
+-->
+      <mat-form-field>
+        <mat-label>Escolha a data</mat-label>
+        <input matInput [matDatepicker]="picker"
+        [(ngModel)]="lancamentodata" 
+        name="data"
+        required >
+        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+
+
      </form>
  
      <div class="status-prioridade">

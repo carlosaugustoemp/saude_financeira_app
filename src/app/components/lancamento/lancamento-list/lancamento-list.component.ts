@@ -44,9 +44,9 @@ export class LancamentoListComponent {
   }
 
   retornaDescricaoTipoConta(tipoConta: any): string {
-    if(tipoConta == '0') {
+    if(tipoConta == '1') {
       return 'Remuneração'
-    } else if(tipoConta == '1') {
+    } else if(tipoConta == '2') {
       return 'Despesa'
     } else {
       return 'Transferência'

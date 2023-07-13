@@ -13,7 +13,7 @@ export class SaldoTotalService {
 
   constructor(private http: HttpClient) { }
 
-  findSaldoTotal(): Observable<DespesaPorConta[]> {
-    return this.http.get<DespesaPorConta[]>(`${API_CONFIG.baseUrl}/saldototal`);
+  findSaldoTotal(inicio: string, final: string): Observable<DespesaPorConta[]> {
+    return this.http.get<DespesaPorConta[]>(`${API_CONFIG.baseUrl}/saldototal?dtinicio=${inicio}&dtfinal=${final}`);
   }
 }

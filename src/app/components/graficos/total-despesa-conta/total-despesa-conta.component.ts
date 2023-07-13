@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { DespesaPorContaService } from 'src/app/services/despesaPorConta.service';
-
+import { DateAdapter } from '@angular/material/core';
 
 @Component({
   selector: 'app-total-despesa-conta',
@@ -8,9 +8,12 @@ import { DespesaPorContaService } from 'src/app/services/despesaPorConta.service
   styleUrls: ['./total-despesa-conta.component.css']
 })
 export class TotalDespesaContaComponent {
+	dataInicial: Date;
+	dataFinal: Date;
+	dtInicialEnviar: string;
+	dtFinalEnviar: string;
 
 	single = [];
-	single2 = [];
 	showXAxis = true;
 	showYAxis = true;
 	gradient = false;
@@ -31,10 +34,17 @@ export class TotalDespesaContaComponent {
 
 	onSelect(event) {
 	}
-	constructor(private service: DespesaPorContaService) { }
+	constructor(private service: DespesaPorContaService,
+		private dateAdapter: DateAdapter<Date>) {
+		this.dateAdapter.setLocale('en-GB');
+	 }
 
 	ngOnInit(): void {
-	this.findAll();
+		var date = new Date();
+		this.dataInicial = new Date(date.getFullYear(), date.getMonth(), 1);
+		this.dataFinal = new Date(date.getFullYear(), date.getMonth() + 1, 0);
+
+		this.findAll();
 		this.view = [1200, 200];
 	}
 
@@ -43,10 +53,29 @@ export class TotalDespesaContaComponent {
 	}
 
 	findAll(): void {
-		this.service.findTotalDespesaConta().subscribe(resposta => {
+		this.defineDataInicio(this.dataInicial);
+		this.defineDataFinal(this.dataFinal)
+		this.service.findTotalDespesaConta(this.dtInicialEnviar, this.dtFinalEnviar).subscribe(resposta => {
 		this.single = resposta;
-		this.single2 = resposta;
 		})
+	}
+
+	defineDataInicio(dtInicial: Date){
+		const dia = dtInicial.getDate().toString().padStart(2,'0')
+		const mes = String(this.dataInicial.getMonth() + 1).padStart(2,'0')
+		const ano = this.dataInicial.getFullYear() 
+		this.dtInicialEnviar = dia+"/"+mes+"/"+ano
+	}
+
+	defineDataFinal(dtFinal: Date){
+		const dia2 = dtFinal.getDate().toString().padStart(2,'0')
+		const mes2 = String(this.dataFinal.getMonth() + 1).padStart(2,'0')
+		const ano2 = this.dataFinal.getFullYear() 
+		this.dtFinalEnviar = dia2+"/"+mes2+"/"+ano2
+	}
+
+	Ok(){
+		this.findAll();
 	}
 
 }
