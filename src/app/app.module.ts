@@ -44,6 +44,7 @@ import { LancamentoDeleteComponent } from './components/lancamento/lancamento-de
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { TotalDespesaContaComponent } from './components/graficos/total-despesa-conta/total-despesa-conta.component';
 import { SaldoTotalComponent } from './components/graficos/saldo-total/saldo-total.component';
+import { TotalMovimentacaoMensalComponent } from './components/graficos/total-movimentacao-mensal/total-movimentacao-mensal.component';
 
 @NgModule({
   declarations: [
@@ -61,7 +62,8 @@ import { SaldoTotalComponent } from './components/graficos/saldo-total/saldo-tot
     LancamentoUpdateComponent,
     LancamentoDeleteComponent,
     TotalDespesaContaComponent,
-    SaldoTotalComponent
+    SaldoTotalComponent,
+    TotalMovimentacaoMensalComponent
   ],
   imports: [
     BrowserModule,
