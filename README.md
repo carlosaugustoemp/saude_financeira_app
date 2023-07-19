@@ -12,6 +12,11 @@ Tela de Login
 Tela principal que apresentará os indicadores financeiros do usuário
 ![image](https://github.com/carlosaugustoemp/saude_financeira_app/assets/14986146/208cc136-445e-4fe0-95dc-520d5fabe2ae)
 
+Tela principal que apresentará os indicadores financeiros do usuário (Versão 2)
+![image](https://github.com/carlosaugustoemp/saude_financeira_app/assets/14986146/e40eab08-ac17-4238-8197-c42ced3cb551)
+
+
+
 Cadastro dos Lançamentos Financeiros
 ![image](https://github.com/carlosaugustoemp/saude_financeira_app/assets/14986146/859bcb1b-143e-4613-8b90-f955fae8eea2)
 Inclusão de Lançamento Financeiro
